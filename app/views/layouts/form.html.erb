@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Login &amp; Register Templates</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://use.fontawesome.com/93f6d0ebad.js"></script>
+  <%= csrf_meta_tags %>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <style>
+    .top-content{
+
+
+    }
+
+  </style>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<!-- Top content -->
+<div id="back">
+  <a id="go_back" href="<%= root_path %>"> <i class="fa fa-arrow-circle-o-left fa-5x" aria-hidden="true"></i></a>
+</div>
+<div class="top-content">
+  <div class="inner-bg">
+    <div class="container">
+      <div class="row">
+      </div>
+      <div class="row">
+        <%= yield %>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Javascript -->
+<script >
+     $.backstretch("<%= asset_path 'slider-2.jpg' %>");
+     $(".forms .form-control").addClass("forms_not_changed");
+     $(".forms .form-control").on("change", function () {
+
+      /*   $(this).removeClass("forms_not_changed");
+         $(this).addClass("forms_changed");*/
+
+        })
+
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1><%= @course.name %></h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb pull-right">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Tutorials", categories_path %></li>
+          <li class="active">Video</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input id="courseId" type="hidden" value="<%= @course.id  %>">
+<!-- Video: film view -->
+<section class="content content-light  video-film">
+  <div class="container">
+    <!-- Video film view - center -->
+    <div class="row">
+      <div class="col-md-8">
+        <article>
+          <!-- Video film - player -->
+          <%= videojs_rails sources: { mp4: "#{  asset_path 'soon.mp4' }", webm: ""}, setup: "{}", controls: true, width:"617", height: "360" do %>
+              Please enable <b>JavaScript</b> to see this content.
+          <%- end %>
+          <hr class="invisible" />
+          <hr class="invisible" />
+
+          <!-- Video - related -->
+
+        </article>
+      </div>
+      <aside class="col-md-4">
+        <h3 class="video-title"><%= @course.name  %></h3>
+        <p class="video-params">
+            <% if @course.users.where(role: "teacher").count == 1 %>
+          Author: <b> <%= @course.users.where(role: "teacher").pluck(:username).first  %></b> <br />
+              <% else  %>
+          Authors :
+              <%	 @course.users.where(role: "teacher").each do |author| %>
+                <%= author.username %>
+              <% end  %>
+            <% end  %>
+          <br>
+          Date: <b><%= @course.created_at.to_formatted_s(:long) %></b> <br />
+          Category: <b> <%= @course.categorie.name %> </b> <br />
+          University: <b> <%= @course.university.name %> </b> <br />
+          Likes: <b id="likes_value"> <%= @course.rating  %> </b> <a href="#"><i class="fa fa-heart"></i></a>
+
+          </p>
+        <!--<p class="video-description">handler has just finished his Graphic Design degree and enjoys continuing to learn from Monica and building his experience. Joey and Phoebe focus on bringing new business to the company. They have won a number of big clients recently and both also have qualifications in project management to ensure that the projects run smoothly from start to finish.</p>-->
+        <%	 if !current_user.nil? %>
+        <div class="row buttons-margin-horizontal">
+          <% if !didLike? %>
+          <div class="col-md-6 button-full">
+            <a class="btn btn-theme btn-red" id="add_like"><i class="fa fa-heart"></i> Like</a>
+          </div>
+          <div class="col-md-6 button-full">
+            <a class="btn btn-theme btn-orange"  id="add_dislike"><i class="fa fa-thumbs-down"></i> Dislike</a>
+          </div>
+              <% end  %>
+        </div>
+
+
+          <%	 if CourseUserPivot.where(course_id: @course.id, user_id: current_user.id).any? %>
+            <p class="button-full buttons-margin-horizontal">
+              <a class="btn btn-theme btn-green" disabled="true">
+                <i class="fa fa-download"> <b style="font-family: Arial">Enrolled</b></i>
+              </a>
+            </p>
+          <%	 else  %>
+
+        <p class="button-full buttons-margin-horizontal"><%= link_to  enroll_path(@course.id, current_user.id ) ,class: 'btn btn-theme btn-green' do %>
+              <i class="fa fa-download"> <b style="font-family: Arial">Enroll Now</b></i>
+          <%  end   %></p>
+
+        <%	 end  %>
+            <%  else %>
+            <p class="button-full buttons-margin-horizontal"><%= link_to  new_user_session_path  ,class: 'btn btn-theme btn-green' do %>
+                  <i class="fa fa-download"> <b style="font-family: Arial">Enroll Now</b></i>
+              <%  end   %></p>
+        <% end %>
+
+
+      </aside>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+          <div class="panel panel-info">
+            <div class="panel-heading">About Course</div>
+            <div class="panle-body">
+              <p style="padding-left: 10px;"><%= @course.description  %></p>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">Instructors</div>
+          <div class="panel-body" id="teachers" style="display: flex;  flex-wrap: wrap;">
+        <%	 @course.users.where(role: "teacher").each do |author| %>
+        <div class="media" style="margin-top: 0px; margin-right: 20px;">
+          <div class="media-left media-middle">
+            <a >
+              <img style="border-radius: 50%; width: 80px; height: 80px;" src="<%= asset_path author.icon %>" class="instructor-img" alt="bio for Leo Porter">
+            </a>
+            <h5 style="text-align: center;"> <%= author.username.capitalize  %> </h5>
+          </div>
+        </div>
+            <%	 end  %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+</section>
+
+<script >
+    $("#add_like").click(function(){
+    var v = $('#likes_value').text();
+    $("#add_like").attr('disabled', "true");
+    var c_id = $("#courseId").val();
+        $.ajax({
+            url: "/courses/"+ c_id + "/add_like",
+            context: document.body
+        }).done(function(result) {
+            console.log(result)
+        });
+    var new_value = parseInt(v) + 1;
+    $("#likes_value").text(new_value.toString())
+
+    });
+    $("#add_dislike").click(function(){
+        var v = $('#likes_value').text();
+        $("#add_dislike").attr('disabled', "true");
+        var c_id = $("#courseId").val();
+        $.ajax({
+            url: "/courses/"+ c_id + "/add_dislike",
+            context: document.body
+        }).done(function(result) {
+            console.log(result)
+        });
+        var new_value = parseInt(v) - 1;
+        $("#likes_value").text(new_value.toString())
+
+    })
+</script>

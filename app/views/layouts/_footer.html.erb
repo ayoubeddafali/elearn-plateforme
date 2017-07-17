@@ -1,0 +1,37 @@
+<style>
+<%	if controller.action_name == "about"   %>
+  footer {
+    border-top: 0.5px solid #2DC751;
+  }
+<% else   %>
+footer {
+  border-top: 0.5px solid orangered;
+}
+<% end   %>
+</style>
+
+<footer class="main bg-dark-img" >
+  <section class="widgets">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 footer-qlink">
+          <h4>Quick links</h4>
+          <nav>
+            <ul>
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "About Us", about_path %> </li>
+              <li> <%= link_to "Contact Us", contact_path  %> </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+          <p>Copyright Reserved © </p>
+          <p>ENSAK 2017 </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</footer>

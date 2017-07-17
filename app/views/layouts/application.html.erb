@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Elearn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <!--<script src="https://use.fontawesome.com/93f6d0ebad.js"></script>-->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="main bg-dark-img home-1">
+      <div class="container">
+          <%=  render 'layouts/navbar' %>
+          <%= yield %>
+          <%= render 'layouts/footer' %>
+      </div>
+
+  </div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function() {
+        $('video').mediaelementplayer({
+            alwaysShowControls: false,
+            videoVolume: 'horizontal',
+            features: ['playpause','progress','volume','fullscreen']
+        });
+    });
+</script>

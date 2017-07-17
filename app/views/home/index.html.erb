@@ -1,0 +1,126 @@
+<div class="start">
+<p class="header text-center text-white">
+  <strong>Learning</strong> made easy via the <strong>internet</strong>
+  <a href="<%= categories_path %>" class="btn btn-theme btn-orange">Start today</a>
+</p>
+</div>
+<div  id="parent" class="screens animation-domready">
+    <img id="img1" src="/home1_tab3.png" data-animation-delay="0.5s" data-animation="fadeInUp" class="animated" alt="" />
+    <img id="img2"  src="/home1_tab2.png" data-animation-delay="1.5s" data-animation="fadeInUp" class="animated" alt="" />
+    <img id="img3" src="/home1_tab1.png" data-animation-delay="2.5s" data-animation="fadeInUp" class="animated" alt="" />
+</div>
+
+
+<div class="content content-light home-1" id="next">
+  <section class="row animation-scroll">
+    <figure class="col-md-6 animated animation-element" data-animation="bounceInLeft"><%= image_tag("home1_img1.png")  %></figure>
+    <article class="col-md-6 animated" data-animation="bounceInRight">
+      <h3><strong>Learn</strong> from your <strong>home office</strong></h3>
+      <p>We believe that analysis of your company and your customers is key in responding effectively to your promotional needs and we will work with you to fully understand your business.</p>
+    </article>
+  </section>
+  <section class="row animation-scroll">
+    <article class="col-md-6 animated animation-element" data-animation="bounceInLeft">
+      <h3><strong>Stay tuned</strong> with your <strong>mobile devices</strong></h3>
+      <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur.</p>
+    </article>
+    <figure class="col-md-6 animated animation-element" data-animation="bounceInRight"><%= image_tag("home1_img2.png") %></figure>
+  </section>
+  <section class="row animation-scroll">
+    <figure class="col-md-6 animated animation-element" data-animation="bounceInLeft"><%= image_tag("home1_img3.png") %></figure>
+    <article class="col-md-6 animated bounceInDown animation-element" data-animation="bounceInUp">
+      <h3><strong>Connect</strong> different file types everywhere</h3>
+      <p>We believe that analysis of your company and your customers is key in responding effectively to your promotional needs and we will work with you to fully understand your business.</p>
+    </article>
+  </section>
+  <section class="row animation-scroll">
+    <article class="col-md-6 animated animation-element" data-animation="bounceInLeft">
+      <h3><strong>Share tutorials</strong> with your <strong>friends</strong></h3>
+      <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur.</p>
+    </article>
+    <div class="col-md-6 animated widget-social animation-element" data-animation="bounceInRight">
+      <a class="btn btn-social btn-social-circle social-facebook" ><i class="fa fa-facebook"></i><span class="click-number">32</span></a>
+      <a class="btn btn-social btn-social-circle social-twitter" ><i class="fa fa-twitter"></i><span class="click-number">24</span></a>
+      <a class="btn btn-social btn-social-circle social-gplus" ><i class="fa fa-google-plus"></i><span class="click-number">14</span></a>
+      <a class="btn btn-social btn-social-circle social-dribbble" ><i class="fa fa-dribbble"></i><span class="click-number">8</span></a>
+      <i class="fa fa-circle fa-lg"></i><i class="fa fa-circle fa-2x"></i><i class="fa fa-circle fa-3x"></i>
+      <span class="text"><i class="fa fa-comments text-orange"></i> <b>32</b> people like your tutorials</span>
+    </div>
+  </section>
+</div>
+
+<div class="popular_videos">
+<section class="content videos-list videos-list-grid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2 align="center">Popular Courses</h2>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row" style="display: flex; flex-wrap: wrap;">
+      <% @popular_courses.each do |course| %>
+      <article class="col-md-4 video-item">
+        <a class="video-prev video-prev-small">
+
+          <%= image_tag("https://unsplash.it/#{rand(600..618)}/#{rand(300..320)}/?random") %>
+          <i class="fa fa-play"> <span class="overlay"></span></i></a>
+        <h3 class="video-title"> <%= link_to course.name, category_course_path(course.categorie.id, course.id) %> </h3>
+      </article>
+          <% end  %>
+    </div>
+
+  </div>
+</section>
+</div>
+<script type="text/javascript" charset="utf-8">
+    var $animation_elements = $('.animation-element');
+    var $animation_elements_popular = $('.video-item');
+    var $window = $(window);
+
+    function check_if_popular_in_view() {
+        var window_height = $window.height();
+        var window_top_position = $window.scrollTop();
+        var window_bottom_position = (window_top_position + window_height);
+
+        $.each($animation_elements_popular, function() {
+            var $element = $(this);
+            var element_height = $element.outerHeight();
+            var element_top_position = $element.offset().top;
+            var element_bottom_position = (element_top_position + element_height);
+
+            //check to see if this current container is within viewport
+            if ((element_bottom_position >= window_top_position   ) &&
+                (element_top_position <= window_bottom_position )) {
+                $element.addClass('animated fadeIn');
+            } else {
+                $element.removeClass('animated');
+            }
+        });
+    }
+    function check_if_in_view() {
+        var window_height = $window.height();
+        var window_top_position = $window.scrollTop();
+        var window_bottom_position = (window_top_position + window_height);
+
+        $.each($animation_elements, function() {
+            var $element = $(this);
+            var element_height = $element.outerHeight();
+            var element_top_position = $element.offset().top;
+            var element_bottom_position = (element_top_position + element_height);
+
+            //check to see if this current container is within viewport
+            if ((element_bottom_position >= window_top_position) &&
+                (element_top_position <= window_bottom_position)) {
+                $element.addClass('animated bounceIn');
+            } else {
+                $element.removeClass('animated');
+            }
+        });
+    }
+
+    $window.on('scroll resize', check_if_in_view);
+    $window.on('scroll resize', check_if_popular_in_view);
+    $window.trigger('scroll');
+</script>

@@ -1,0 +1,52 @@
+<section style="margin: 40px;" >
+  <div class="container">
+
+    <div class="col-md-12">
+      <h1 style=" border-bottom:2px solid royalblue; padding-bottom: 9px;   text-align: center ;"> Add Course </h1>
+    </div>
+    <%= render partial: 'layouts/errors', locals: {object: @course} %>
+    <%= form_for @course, url: category_courses_url do |f| %>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :name  %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :url  %>
+            <%= f.text_field :url, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.label :description  %>
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :university_id  %>
+            <%= f.collection_select(:university_id, University.all , :id, :to_s , prompt: true , :class=> "form-control") %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :categorie_id  %>
+            <%	 if @cat.nil? %>
+                <%= f.collection_select(:categorie_id, Categorie.all , :id, :to_s , prompt: true , :class=> "form-control" ) %>
+          <%	 else  %>
+                <%= f.collection_select(:categorie_id, Categorie.all , :id, :to_s , prompt: true , :selected => @cat.id, :class=> "form-control" ) %>
+          <%	 end  %>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.submit "Save", class: "btn btn-block btn-primary" %>
+          </div>
+        </div>
+    <% end %>
+    <hr class="invisible" />
+
+  </div>
+</section>

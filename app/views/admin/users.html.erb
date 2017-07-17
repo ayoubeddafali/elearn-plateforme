@@ -1,0 +1,61 @@
+<section class="content content-light  videos-list videos-list-grid">
+  <div class="container">
+
+    <ul class="nav nav-tabs" style="  border: 0px hidden;">
+
+      <li role="presentation" class="presentation active" id="active_by_default"><%= link_to "Gestion des cours", settings_path %></li>
+      <li role="presentation" class="presentation" id="tab2"> <%= link_to "Gestion des utilisateurs", settings_users_path %></li>
+      <li role="presentation" class="presentation" id="tab3"> <%= link_to "Gestion des universités", settings_universities_path %></li>
+    </ul>
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">Gestion / <small>Gestion des cours </small></h3>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover" style="font-family:'Lucida Grande', sans-serif">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Date de Création</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <% @users.each  do |user| %>
+              <tr>
+                <td><%= user.id %> </td>
+                <td> <%= user.username %> </td>
+                <td> <%= user.email  %> </td>
+                <td> <%= user.role%> </td>
+                <td> <%=  user.created_at.to_formatted_s(:long) %>  </td>
+
+                <td>
+                  <%= link_to "/settings/users/#{user.id}", method: :delete do %>
+                      <i class="fa fa-trash-o fa-2x"></i>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to root_path do %>
+                      <i class="fa fa-pencil fa-2x"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end  %>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    $("#tab2").addClass("active");
+    $("#tab3").removeClass("active");
+    $("#active_by_default").removeClass("active");
+
+</script>

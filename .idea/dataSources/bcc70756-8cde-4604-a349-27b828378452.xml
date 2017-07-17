@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="elearning@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="elearning">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="Chinook"/>
+    <schema id="4" parent="1" name="collabtive"/>
+    <schema id="5" parent="1" name="distributed"/>
+    <schema id="6" parent="1" name="famille"/>
+    <schema id="7" parent="1" name="fullcalendar"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="laravel52"/>
+    <schema id="10" parent="1" name="laravelMsg"/>
+    <schema id="11" parent="1" name="learnLaravel"/>
+    <schema id="12" parent="1" name="musicDB"/>
+    <schema id="13" parent="1" name="myblog"/>
+    <schema id="14" parent="1" name="mysql"/>
+    <schema id="15" parent="1" name="performance_schema"/>
+    <schema id="16" parent="1" name="phpmyadmin"/>
+    <schema id="17" parent="1" name="pms"/>
+    <schema id="18" parent="1" name="pms1"/>
+    <schema id="19" parent="1" name="pms2"/>
+    <schema id="20" parent="1" name="prego"/>
+    <schema id="21" parent="1" name="ProjectV01"/>
+    <schema id="22" parent="1" name="ProjeLead"/>
+    <schema id="23" parent="1" name="qdpm"/>
+    <schema id="24" parent="1" name="saikiranBookstoreApp"/>
+    <schema id="25" parent="1" name="shareboard"/>
+    <schema id="26" parent="1" name="test"/>
+    <schema id="27" parent="1" name="test_ror"/>
+    <schema id="28" parent="1" name="wp"/>
+  </database-model>
+</dataSource>

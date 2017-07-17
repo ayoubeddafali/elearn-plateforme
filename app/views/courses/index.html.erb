@@ -1,0 +1,80 @@
+
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Video sections</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb pull-right">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%=  link_to "Tutorials", categories_path %></li>
+          <li class="active">Video</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Video list boxes: grid -->
+<section class="content content-light  videos-list videos-list-grid">
+  <div class="container">
+
+    <div class="filter">
+      <a href="#" class="btn btn-theme navbar-btn btn-orange">All</a> &nbsp;
+      <a href="#" class="btn btn-theme navbar-btn btn-lightblue">Webdesign</a>
+      <a href="#" class="btn btn-theme navbar-btn btn-lightblue">Coding</a>
+      <a href="#" class="btn btn-theme navbar-btn btn-lightblue">Languages</a>
+      <a href="#" class="btn btn-theme navbar-btn btn-lightblue">Music</a>
+    </div>
+
+    <hr class="invisible" />
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6" id="will_paging"><%= will_paginate%></div>
+      <div class="col-lg-3"></div>
+    </div>
+    <div class="row" style="display: flex; flex-wrap: wrap">
+
+      <% @courses.each do |course| %>
+      <article class="col-md-4 video-item">
+        <%= link_to image_tag("https://unsplash.it/#{ rand(190..210) }/ #{ rand(290..310) }/?random"), category_course_path(course.categorie.id ,course.id) , class: "video-prev video-prev-small" %>
+        <!--<a href="/categories/" class="video-prev video-prev-small"></a>-->
+        <h3 class="video-title" style="text-align: center;"><a   ><%= course.name  %></a></h3>
+        <div class="row video-params">
+          <div class="col-md-8">
+            Author: <b> <%= course.university.name  %> </b>
+          </div>
+          <div class="col-md-4 text-right">
+            Views: <b> 222</b>
+          </div>
+        </div>
+        <!--<div class="row video-params">
+          <div class="col-md-7">
+            Date: <b> <%=  time_ago_in_words course.created_at %> </b>
+          </div>
+
+        </div>
+        <div class="row video-params">
+          <div class="col-md-12">
+            Category: <b> <%= course.categorie.name  %> </b>
+          </div>
+        </div>-->
+      </article>
+      <% end  %>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+  $(".pagination a").click(function () {
+      $('html,body').animate({
+              scrollTop: $(".videos-list").offset().top},
+          '0.001');
+  })
+</script>
+
+

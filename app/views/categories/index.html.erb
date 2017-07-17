@@ -1,0 +1,58 @@
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Library of videos</h1>
+            </div>
+            <div class="col-md-5">
+                <ol class="breadcrumb pull-right">
+                    <li> <%= link_to "Home", root_path %> </li>
+                    <li class="active">Video</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content content-light">
+    <div class="container">
+
+        <div class="row category-box-row">
+            <%  @categories.first(6).each do |c| %>
+            <div class="col-md-4">
+                <a href="/categories/<%= c.id %>/courses" class="category-box-item">
+                    <i class="fa fa-<%=  c.icon %> fa-5x"></i>
+                    <h2><%= c.name  %></h2>
+                </a>
+            </div>
+            <% end  %>
+        </div>
+        <div class="row category-box-row category-box-row-hidden">
+            <%  for i in (6..@categories.length-1) %>
+            <div class="col-md-4">
+                <a href="/categories/<%= @categories[i].id %>/courses" class="category-box-item">
+                    <i class="fa fa-<%=  @categories[i].icon %> fa-5x"></i>
+                    <h2><%= @categories[i].name  %></h2>
+                </a>
+            </div>
+            <% end  %>
+        </div>
+
+
+
+        <hr class="invisible" />
+
+        <p class="text-center"><a href="#more" class="btn btn-theme btn-gray" id="loadCategoryMore">Load more</a></p>
+    </div>
+</section>
+
+<script type="text/javascript" charset="utf-8">
+    $('#loadCategoryMore').click(function() {
+        var $button = $(this);
+        $(this).hide();
+        $('.category-box-row-hidden').slideDown('slow', function() {
+            $button.fadeOut();
+        });
+        return false;
+    });
+</script>

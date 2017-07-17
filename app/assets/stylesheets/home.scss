@@ -1,0 +1,80 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.start
+{
+  margin-top: 100px;
+  margin-bottom: 30px;
+
+}
+#parent
+{
+  position: relative;
+
+}
+
+#fh5co-contact .container{
+  color: whitesmoke;
+  margin-bottom: 30px;
+}
+.shared {
+  margin-bottom: 30px;
+
+}
+#img1 {
+  position: relative;
+}
+#img2 {
+  position: absolute;
+  left:300px;
+}
+#img3 {
+  position: absolute;
+  left:120px;
+  top:-15px;
+}
+
+#next {
+  h3, .text  {
+    color: #FF8000;
+  }
+  p{
+    color: whitesmoke;
+  }
+}
+.content {
+  margin-top: 60px;
+}
+.popular_videos  {
+  h2{
+    margin:0px;
+    color: darkorange;
+  }
+  h3 {  color: white;
+    margin:0px;
+  font-size: 1em;
+  font-family:"Operator Mono Bold";
+  text-align: center;
+  }
+}
+
+footer , .popular_videos{
+  border-top:0.5px solid #dddddd;
+}
+.video-prev img {
+  height: 200px;
+  background-position: center;
+  width: inherit;
+}
+.popular_videos .videos-list-grid {
+  padding-top: 0px;
+}
+.video-prev-small {
+  height: 200px;
+  background-position: center;
+}
+.popular_videos .video-prev:hover .overlay {
+  background-color: rgba(138,165,193, 0.25);
+  background-color: inherit;
+}

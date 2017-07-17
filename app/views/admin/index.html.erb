@@ -1,0 +1,68 @@
+<section class="content content-light  videos-list videos-list-grid">
+  <div class="container">
+    <% if current_user.role == "admin"  || current_user.role == "teacher" %>
+  <ul class="nav nav-tabs" style="  border: 0px hidden;">
+    <li role="presentation" class="presentation " id="active_by_default"><%= link_to "Gestion des cours", settings_path %></li>
+    <% if current_user.role == "admin" %>
+    <li role="presentation" class="presentation"> <%= link_to "Gestion des utilisateurs", settings_users_path %> </li>
+    <li role="presentation" class="presentation" id="tab3"> <%= link_to "Gestion des universités", settings_universities_path %></li>
+  <%	 end  %>
+    </ul>
+  <div class="box box-info">
+    <div class="box-header">
+      <h3 class="box-title">Gestion / <small>Gestion des cours </small></h3>
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+      <table class="table table-hover" style="font-family:'Lucida Grande', sans-serif">
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Catégorie</th>
+          <th>Université</th>
+          <th>Date de Création</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @courses.each  do |course| %>
+        <tr>
+          <td><%= course.id %> </td>
+          <td> <%= course.name %> </td>
+          <td> <%= course.categorie.name  %> </td>
+          <td> <%= course.university.name  %> </td>
+          <td> <%=  course.created_at.to_formatted_s(:long) %>  </td>
+
+          <td>
+            <%= link_to "/settings/courses/#{course.id}", method: :delete do %>
+                <i class="fa fa-trash-o fa-2x"></i>
+            <% end %>
+          </td>
+          <td>
+          <%= link_to root_path do %>
+                <i class="fa fa-pencil fa-2x"></i>
+            <% end %>
+          </td>
+        </tr>
+            <% end  %>
+
+      </table>
+    </div>
+  </div>
+        <%	 else   %>
+        <ul class="nav nav-tabs" style="  border: 0px hidden;">
+          <li role="presentation" class="presentation " id="active_by_default"><%= link_to "Update Profile",""  %></li>
+          <li role="presentation" class="presentation"> <%= link_to "Inbox", "" %> </li>
+        </ul>
+          <p> I'm a student   </p>
+
+        <%	 end  %>
+  </div>
+</section>
+
+<script type="text/javascript" charset="utf-8">
+    $("#active_by_default").addClass("active");
+    $("#tab2").removeClass("active");
+    $("#tab3").removeClass("active");
+
+</script>

@@ -1,0 +1,47 @@
+<section class="content content-light  videos-list videos-list-list">
+  <div class="container">
+    <hr class="invisible" />
+    <% if !@results.any?  %>
+        <h3>Nothing to search for</h3>
+        <% else  %>
+    <% @results.each do |course| %>
+    <article class="row video-item">
+      <div class="col-md-4">
+        <a class="video-prev video-prev-small"> <%= image_tag "https://unsplash.it/#{ rand(280..295)}/#{rand(190..210)}/?random" %> </a>
+        <p class="button-full"><a href="<%= category_course_path(course.categorie.id, course.id) %>" class="btn btn-theme btn-green"><i class="fa fa-play"></i> Go to Course <small><%= course.rating %> <i class="fa fa-heart"></i></small></a></p>
+      </div>
+      <div class="col-md-8">
+        <h3 class="video-title"> <%= link_to course.name, category_course_path(course.categorie.id, course.id) %>  </h3>
+        <p class="video-description"><%=  course.description  %></p>
+        <div class="row video-params">
+          <div class="col-md-4">
+            <% if course.users.where(role: "teacher").count == 1 %>
+                Author: <b> <%= course.users.where(role: "teacher").pluck(:username).first  %></b> <br />
+            <% else  %>
+                Authors :
+                <%	 course.users.where(role: "teacher").each do |author| %>
+                    <%= author.username %>,
+                <% end  %>
+            <% end  %>
+          </div>
+          <div class="col-md-3">
+            Date: <b><%= course.created_at.to_formatted_s(:long) %></b> <br />
+          </div>
+          <div class="col-md-3">
+            Category: <b> <%= course.categorie.name %> </b> <br />
+          </div>
+          <div class="col-md-2">
+            Views: <b><%= course.users.where(role: "student").count  %></b>
+          </div>
+        </div>
+      </div>
+    </article>
+     <% end  %>
+    <% end  %>
+
+
+
+
+
+  </div>
+</section>
